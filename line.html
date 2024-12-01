@@ -13,7 +13,6 @@
 
     var stations = JSON.parse(sessionStorage.getItem("stations"))
     var ul = document.getElementById("stations")
-    console.log(typeof stations)
     for (let i = 0; i < stations.length; i++) {
         var newli = document.createElement("li")
         newli.textContent = stations[i].name + " at Platform " + stations[i].platform
