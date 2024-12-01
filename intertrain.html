@@ -1,0 +1,39 @@
+<title>InterTrain</title>
+
+<h1>InterTrain</h1>
+<p>
+    Lines:<br>
+    <ul id="lines"></ul>
+    <br>
+    Stations:<br>
+    <ul id="stations"></ul>
+</p>
+
+<script src="intertrain.js"></script>
+<script>
+    function openline(line) {
+        for (let i = 0; i < lines.length; i++) {
+            if (lines[i].number == line) {
+                sessionStorage.setItem("number", lines[i].number + ": " + lines[i].name)
+                sessionStorage.setItem("type", lines[i].type)
+                sessionStorage.setItem("status", lines[i].status)
+                sessionStorage.setItem("stations", JSON.stringify(lines[i].stations))
+                location.assign("line.html")
+            }
+        }
+    }
+
+    var linelist = document.getElementById("lines")
+    for (let i = 0; i < lines.length; i++) {
+        var newli = document.createElement("li")
+        newli.innerHTML = "<a href='#' onclick='openline(\"" + lines[i].number + "\")'>" + lines[i].number + ": " + lines[i].name + "</a>"
+        linelist.appendChild(newli)
+    }
+
+    var stationlist = document.getElementById("stations")
+    for (let i = 0; i < stations.length; i++) {
+        var newli = document.createElement("li")
+        newli.innerHTML = "<a href='#' onclick='openline(\"" + stations[i].name + "\")'>" + stations[i].name + "</a>"
+        stationlist.appendChild(newli)
+    }
+</script>
