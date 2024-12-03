@@ -1,4 +1,8 @@
+<!DOCTYPE html>
+
 <title>InterTrain</title>
+
+<a href="index.html">&lt;&ndash; InterTrans</a>
 
 <h1>InterTrain</h1>
 <p>
@@ -9,16 +13,30 @@
     <ul id="stations"></ul>
 </p>
 
-<script src="intertrain.js"></script>
+<script src="lines.js"></script>
+<script src="stations.js"></script>
 <script>
     function openline(line) {
         for (let i = 0; i < lines.length; i++) {
             if (lines[i].number == line) {
+                sessionStorage.clear()
                 sessionStorage.setItem("number", lines[i].number + ": " + lines[i].name)
                 sessionStorage.setItem("type", lines[i].type)
                 sessionStorage.setItem("status", lines[i].status)
                 sessionStorage.setItem("stations", JSON.stringify(lines[i].stations))
                 location.assign("line.html")
+            }
+        }
+    }
+
+    function openstation(station) {
+        for (let i = 0; i < stations.length; i++) {
+            if (stations[i].name == station) {
+                sessionStorage.clear()
+                sessionStorage.setItem("name", stations[i].name)
+                sessionStorage.setItem("platforms", stations[i].platforms)
+                sessionStorage.setItem("lines", JSON.stringify(stations[i].lines))
+                location.assign("station.html")
             }
         }
     }
@@ -33,7 +51,7 @@
     var stationlist = document.getElementById("stations")
     for (let i = 0; i < stations.length; i++) {
         var newli = document.createElement("li")
-        newli.innerHTML = "<a href='#' onclick='openline(\"" + stations[i].name + "\")'>" + stations[i].name + "</a>"
+        newli.innerHTML = "<a href='#' onclick='openstation(\"" + stations[i].name + "\")'>" + stations[i].name + "</a>"
         stationlist.appendChild(newli)
     }
 </script>
