@@ -5,11 +5,13 @@
 <h1 id="name"></h1>
 
 <p>
-    Platforms: <span id="platforms"></span><br><br>
+    Platforms: <span id="platforms"></span><br>
+    <div id="alerts">Alerts: <ul id="alertslist"></ul><br></div><br>
     Lines: <ul id="lineslist"></ul><br>
 </p>
 
 <script src="lines.js"></script>
+<script src="alerts.js"></script>
 <script>    
     function openline(line) {
         console.log(lines)
@@ -29,10 +31,25 @@
     document.getElementById("platforms").textContent = sessionStorage.getItem("platforms")
     
     var linelist = JSON.parse(sessionStorage.getItem("lines"))
-    var ul = document.getElementById("lineslist")
+    var linesul = document.getElementById("lineslist")
     for (let i = 0; i < linelist.length; i++) {
         var newli = document.createElement("li")
         newli.innerHTML = "<a href='#' onclick='openline(\"" + linelist[i] + "\")'>" + linelist[i] + "</a>"
-        ul.appendChild(newli)
+        linesul.appendChild(newli)
+    }
+
+    var alertsul = document.getElementById("alertslist")
+    if (stationalerts.length == 0) {
+        document.getElementById("alerts").style.display = "none"
+    } else {
+        for (let i = 0; i < stationalerts.length; i++) {
+            if (stationalerts[i].station == sessionStorage.getItem("name")) {
+                var newli = document.createElement("li")
+                newli.innerHTML = "<h1>" + stationalerts[i].status + ": " + stationalerts[i].title + "</h1><p>" + stationalerts[i].description + "</p>"
+                alertsul.appendChild(newli)
+            } else {
+                document.getElementById("alerts").style.display = "none"
+            }
+        }
     }
 </script>   

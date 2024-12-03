@@ -6,18 +6,17 @@
 
 <p>
     Type: <span id="type"></span><br>
-    Status: <span id="status"></span><br><br>
+    Status: <span id="status"></span><br>
+    <div id="alerts">Alerts: <ul id="alertslist"></ul><br></div><br>
     Stations: <ul id="stations"></ul><br>
 </p>
 
 <script src="stations.js"></script>
+<script src="alerts.js"></script>
 <script>
     function openstation(station) {
         for (let i = 0; i < stations.length; i++) {
             if (stations[i].name == station) {
-                console.log(stations[i])
-                console.log(stations[i].name)
-                console.log(stations[i].platforms)
                 sessionStorage.clear()
                 sessionStorage.setItem("name", stations[i].name)
                 sessionStorage.setItem("platforms", stations[i].platforms)
@@ -33,10 +32,25 @@
     document.getElementById("status").textContent = sessionStorage.getItem("status")
     
     var stationlist = JSON.parse(sessionStorage.getItem("stations"))
-    var ul = document.getElementById("stations")
+    var stationsul = document.getElementById("stations")
     for (let i = 0; i < stationlist.length; i++) {
         var newli = document.createElement("li")
         newli.innerHTML = "<a href='#' onclick='openstation(\"" + stationlist[i].name + "\")'>" + stationlist[i].name + " at Platform " + stationlist[i].platform + "</a>"
-        ul.appendChild(newli)
+        stationsul.appendChild(newli)
+    }
+
+    var alertsul = document.getElementById("alertslist")
+    if (linealerts.length == 0) {
+        document.getElementById("alerts").style.display = "none"
+    } else {
+        for (let i = 0; i < linealerts.length; i++) {
+            if (linealerts[i].lines.includes(sessionStorage.getItem("number").split(":")[0])) {
+                var newli = document.createElement("li")
+                newli.innerHTML = "<h1>" + linealerts[i].status + ": " + linealerts[i].title + "</h1><p>" + linealerts[i].description + "</p>"
+                alertsul.appendChild(newli)
+            } else {
+                document.getElementById("alerts").style.display = "none"
+            }
+        }
     }
 </script>

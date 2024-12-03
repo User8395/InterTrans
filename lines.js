@@ -2,7 +2,7 @@ const lines = [
     {
         "number": "IT1",
         "name": "Pinewood City - New Karachi",
-        "type": "Shuttle",
+        "type": "Standard",
         "status": "Operational",
         "stations": [
             {
@@ -46,4 +46,4 @@ const lines = [
             }
         ]
     }
-]
+]   

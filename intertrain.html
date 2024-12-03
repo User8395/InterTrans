@@ -15,6 +15,7 @@
 
 <script src="lines.js"></script>
 <script src="stations.js"></script>
+<script src="alerts.js"></script>
 <script>
     function openline(line) {
         for (let i = 0; i < lines.length; i++) {
@@ -39,6 +40,18 @@
                 location.assign("station.html")
             }
         }
+    }
+
+    var alertedlines = []
+    for (let i = 0; i < linealerts.length; i++) {
+        for (let j = 0; j < linealerts[i].lines.length; j++) {
+            alertedlines.push(linealerts[i].lines[j])
+        }
+    }
+
+    var alertedstations = []
+    for (let i = 0; i < stationalerts.length; i++) {
+        alertedstations.push(stationalerts[i].station)
     }
 
     var linelist = document.getElementById("lines")
