@@ -40,16 +40,18 @@
     }
 
     var alertsul = document.getElementById("alertslist")
+
     if (linealerts.length == 0) {
-        document.getElementById("alerts").style.display = "none"
+        document.getElementById("alerts").style.display = "block"
     } else {
         for (let i = 0; i < linealerts.length; i++) {
             if (linealerts[i].lines.includes(sessionStorage.getItem("number").split(":")[0])) {
+		document.getElementById("alerts").style.display = "block"
                 var newli = document.createElement("li")
                 newli.innerHTML = "<h1>" + linealerts[i].status + ": " + linealerts[i].title + "</h1><p>" + linealerts[i].description + "</p>"
                 alertsul.appendChild(newli)
             } else {
-                document.getElementById("alerts").style.display = "none"
+                document.getElementById("alerts").style.display = "block"
             }
         }
     }

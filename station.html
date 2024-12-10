@@ -44,6 +44,7 @@
     } else {
         for (let i = 0; i < stationalerts.length; i++) {
             if (stationalerts[i].station == sessionStorage.getItem("name")) {
+		document.getElementById("alerts").style.display = "block"
                 var newli = document.createElement("li")
                 newli.innerHTML = "<h1>" + stationalerts[i].status + ": " + stationalerts[i].title + "</h1><p>" + stationalerts[i].description + "</p>"
                 alertsul.appendChild(newli)
